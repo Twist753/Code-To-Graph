@@ -32,6 +32,8 @@ Requirements:
 6. Use appropriate shapes: rectangles for functions, diamonds for conditionals, circles for start/end
 7. Return ONLY the Mermaid code, no explanations, no preamble or markdown backticks
 
+NOTE - Always provide a correct and valid mermaid. Double check for any syntax errors in it.
+
 Example format:
 flowchart TD
     A[Start] --> B[Function1]
