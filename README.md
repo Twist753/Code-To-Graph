@@ -82,3 +82,9 @@ The application will open in your browser at `http://localhost:8501`.
 - google-generativeai
 - python-dotenv
 - mermaid
+
+## Webpage View
+<img width="1919" height="862" alt="image" src="https://github.com/user-attachments/assets/f222da7e-fe0c-4dfa-bac0-114f6dc2e185" />
+
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/50b31772-cbe0-4e59-827c-96d6c2064b32" />
+
