@@ -14,16 +14,21 @@ st.set_page_config(
 # --- Forced Light-Theme CSS with New Styling ---
 st.markdown("""
     <style>
-    /* Force light theme and base colors */
     * {
         color-scheme: light !important;
     }
     
-    /* 3. Stronger Gradient Background */
     body, [data-testid="stAppViewContainer"], [data-testid="stHeader"], [data-testid="stToolbar"] {
-        /* White center is now 50% (was 60%), color starts at 80% (was 85%) */
-        background: radial-gradient(ellipse at center, #FFFFFF 50%, #FFF1F1 80%, #FFFBEB 100%) !important;
-        background-attachment: fixed !important;
+        /* Layer 1: SVG pattern (top) - Opacity increased and colors added */
+        background-image: 
+            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Ctext x='20' y='40' style='font-family: monospace; font-size: 20px; fill: rgba(0,0,0,0.3); transform: rotate(-25deg);'%3E&lt;/&gt;%3C/text%3E%3Ctext x='150' y='170' style='font-family: monospace; font-size: 20px; fill: rgba(255,105,180,0.3); transform: rotate(-25deg);'%3E{ }%3C/text%3E%3Ctext x='80' y='100' style='font-family: monospace; font-size: 20px; fill: rgba(173,216,230,0.3); transform: rotate(-25deg);'%3E( )%3C/text%3E%3Ctext x='200' y='60' style='font-family: monospace; font-size: 20px; fill: rgba(255,255,224,0.3); transform: rotate(-25deg);'%3E[ ]%3C/text%3E%3Ctext x='100' y='250' style='font-family: monospace; font-size: 20px; fill: rgba(0,0,0,0.3); transform: rotate(-25deg);'%3E//%3C/text%3E%3C/svg%3E"),
+        /* Layer 2: Color gradient (bottom) */
+            radial-gradient(ellipse at center, #FFFFFF 40%, #FFF1F1 70%, #FFFBEB 100%);
+        
+        background-repeat: repeat, no-repeat !important;
+        background-attachment: fixed, fixed !important;
+        background-position: center center, center center !important;
+        background-size: auto, cover !important; /* SVG repeats, gradient covers */
         color: #000000 !important;
     }
 
@@ -123,9 +128,7 @@ st.markdown("""
     div[data-testid="stHorizontalBlock"] {
         border: 1px solid rgba(255, 255, 255, 0.7); /* Lighter border for glass */
         border-radius: 16px; /* More rounded */
-        /* background-color: rgba(255, 255, 255, 0.65); */ /* OLD */
         background-color: rgba(255, 255, 255, 0.6); /* More transparent */
-        /* backdrop-filter: blur(8px); */ /* OLD */
         backdrop-filter: blur(12px); /* More blur */
         -webkit-backdrop-filter: blur(12px);
         margin-bottom: 1.5rem; /* Add spacing between the blocks */
@@ -183,13 +186,8 @@ def main():
     """, unsafe_allow_html=True)
 
     st.markdown("### Transform your code into interactive diagrams and summaries")
-    
-    # This spacer markdown is a bit of a hack, but it prevents the "---" 
-    # from being absorbed into the stHorizontalBlock CSS rule above.
-    st.markdown("---") 
 
-    # --- Information Section (Replaces Sidebar) ---
-    # This st.columns block will be styled by the [data-testid="stHorizontalBlock"] CSS
+    st.markdown("---") 
     col1, col2 = st.columns(2)
     with col1:
         st.subheader("Supported Files")
@@ -241,7 +239,6 @@ def main():
                     col_diagram, col_summary = st.columns([1, 1])
 
                     with col_diagram:
-                        # 1. NO MORE DIV WRAPPERS NEEDED
                         st.subheader("Code Diagram")
                         render_mermaid(diagram_code)
                     
@@ -254,7 +251,6 @@ def main():
                             st.code(diagram_code, language="mermaid")
                         
                     with col_summary:
-                        # 1. NO MORE DIV WRAPPERS NEEDED
                         st.subheader("AI Summary")
                         st.markdown(summary, unsafe_allow_html=True)
 
