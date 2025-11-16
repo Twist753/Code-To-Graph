@@ -178,7 +178,7 @@ def main():
     st.markdown("""
         <div class="title-container">
             <h1 class="title-main">CodeToDiagram</h1>
-            <span class="title-name">By [Your Name]</span>
+            <span class="title-name">Abhinav Tyagi(102203725) and Nitika(102203847)</span>
         </div>
     """, unsafe_allow_html=True)
 
